@@ -1,9 +1,9 @@
-create or replace procedure carga_manyownership is
+create or replace procedure carga_polecond is
 
   type array_subset is varray(2) of varchar2(10);
   subset array_subset := array_subset('AMAZONAS', 'RORAIMA');
 
-  vcontain_n b$contain_n%rowtype;
+  vpole_cond_n b$pole_cond_n%rowtype;
 
   --fnos filhos 2 nos (pais) (316, 306, 302, 235)
   --fno filhos 1 no (pais) (318, 305, 315)
@@ -11,9 +11,9 @@ create or replace procedure carga_manyownership is
 begin
 
   --deletando registros importados - SOMENTE FILHOS
-  execute immediate 'ALTER TABLE B$CONTAIN_N DISABLE ALL TRIGGERS';
+  execute immediate 'ALTER TABLE B$POLE_COND_N DISABLE ALL TRIGGERS';
 
-  delete from b$contain_n l
+  delete from b$pole_cond_n l
    where exists (select 1
             from b$common_n
            where g3e_fno in (318, 305, 315, 316, 306, 302, 235)
@@ -37,18 +37,18 @@ begin
                  and a.subset = subset(i)
                  and b.subset = a.subset) loop
       begin
-        vcontain_n              := null;
-        vcontain_n.g3e_fid      := c.g3e_fid;
-        vcontain_n.g3e_cno      := 46;
-        vcontain_n.g3e_fno      := c.g3e_fno;
-        vcontain_n.g3e_cid      := 1;
-        vcontain_n.g3e_id       := contain_n_seq.nextval;
-        vcontain_n.ltt_id       := 0;
-        vcontain_n.ltt_date     := sysdate;
-        vcontain_n.g3e_ownerfno := c.g3e_fno_pai;
-        vcontain_n.g3e_ownerfid := c.g3e_fid_pai;
+        vpole_cond_n              := null;
+        vpole_cond_n.g3e_fid      := c.g3e_fid;
+        vpole_cond_n.g3e_cno      := 30660;
+        vpole_cond_n.g3e_fno      := c.g3e_fno;
+        vpole_cond_n.g3e_cid      := 1;
+        vpole_cond_n.g3e_id       := pole_cond_n_seq.nextval;
+        vpole_cond_n.ltt_id       := 0;
+        vpole_cond_n.ltt_date     := sysdate;
+        vpole_cond_n.g3e_ownerfno := c.g3e_fno_pai;
+        vpole_cond_n.g3e_ownerfid := c.g3e_fid_pai;
       
-        insert into b$contain_n values vcontain_n;
+        insert into b$pole_cond_n values vpole_cond_n;
         commit;
       
       exception
@@ -72,37 +72,38 @@ begin
                inner join b$common_n c
                   on c.cod_id = a.street_name
                where a.g3e_fno in (316, 306, 302, 235)
-                 and b.g3e_fno not in (230, 209, 208, 260)
+                 and b.g3e_fno in (230, 209, 208, 260)
                  and a.subset = subset(i)
                  and b.subset = a.subset
                  and c.subset = a.subset) loop
       begin
-        vcontain_n              := null;
-        vcontain_n.g3e_fid      := c.g3e_fid;
-        vcontain_n.g3e_cno      := 46;
-        vcontain_n.g3e_fno      := c.g3e_fno;
-        vcontain_n.g3e_cid      := 1;
-        vcontain_n.g3e_id       := contain_n_seq.nextval;
-        vcontain_n.ltt_id       := 0;
-        vcontain_n.ltt_date     := sysdate;
-        vcontain_n.g3e_ownerfno := c.g3e_fno_pai1;
-        vcontain_n.g3e_ownerfid := c.g3e_fid_pai1;
+        
+        vpole_cond_n              := null;
+        vpole_cond_n.g3e_fid      := c.g3e_fid;
+        vpole_cond_n.g3e_cno      := 30660;
+        vpole_cond_n.g3e_fno      := c.g3e_fno;
+        vpole_cond_n.g3e_cid      := 1;
+        vpole_cond_n.g3e_id       := pole_cond_n_seq.nextval;
+        vpole_cond_n.ltt_id       := 0;
+        vpole_cond_n.ltt_date     := sysdate;
+        vpole_cond_n.g3e_ownerfno := c.g3e_fno_pai1;
+        vpole_cond_n.g3e_ownerfid := c.g3e_fid_pai1;
       
-        insert into b$contain_n values vcontain_n;
+        insert into b$pole_cond_n values vpole_cond_n;
         commit;
       
-        vcontain_n              := null;
-        vcontain_n.g3e_fid      := c.g3e_fid;
-        vcontain_n.g3e_cno      := 46;
-        vcontain_n.g3e_fno      := c.g3e_fno;
-        vcontain_n.g3e_cid      := 2;
-        vcontain_n.g3e_id       := contain_n_seq.nextval;
-        vcontain_n.ltt_id       := 0;
-        vcontain_n.ltt_date     := sysdate;
-        vcontain_n.g3e_ownerfno := c.g3e_fno_pai2;
-        vcontain_n.g3e_ownerfid := c.g3e_fid_pai2;
+        vpole_cond_n              := null;
+        vpole_cond_n.g3e_fid      := c.g3e_fid;
+        vpole_cond_n.g3e_cno      := 30660;
+        vpole_cond_n.g3e_fno      := c.g3e_fno;
+        vpole_cond_n.g3e_cid      := 2;
+        vpole_cond_n.g3e_id       := pole_cond_n_seq.nextval;
+        vpole_cond_n.ltt_id       := 0;
+        vpole_cond_n.ltt_date     := sysdate;
+        vpole_cond_n.g3e_ownerfno := c.g3e_fno_pai2;
+        vpole_cond_n.g3e_ownerfid := c.g3e_fid_pai2;
       
-        insert into b$contain_n values vcontain_n;
+        insert into b$pole_cond_n values vpole_cond_n;
         commit;
       
       exception
@@ -114,6 +115,6 @@ begin
   
   end loop;
 
-  execute immediate 'ALTER TABLE B$CONTAIN_N ENABLE ALL TRIGGERS';
+  execute immediate 'ALTER TABLE B$POLE_COND_N ENABLE ALL TRIGGERS';
 
 end;
